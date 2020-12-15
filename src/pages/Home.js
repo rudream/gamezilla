@@ -22,7 +22,7 @@ const Home = () => {
     const { popular, newGames, upcoming } = useSelector((state) => state.games);
     return (
         <GameList>
-            <AnimateSharedLayout>
+            <AnimateSharedLayout type="crossfade">
                 <AnimatePresence>
                     {pathId && <GameDetail pathId={pathId} />}
                 </AnimatePresence>
