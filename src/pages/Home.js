@@ -4,8 +4,13 @@ import { loadGames } from "../actions/gamesAction";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import Game from "../components/Game";
+import GameDetail from "../components/GameDetail";
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
+    //get current location
+    const location = useLocation();
+    const pathId = location.pathname.split("/")[2];
     //fetch games
     const dispatch = useDispatch();
 
@@ -17,6 +22,7 @@ const Home = () => {
     const { popular, newGames, upcoming } = useSelector((state) => state.games);
     return (
         <GameList>
+            {pathId && <GameDetail />}
             <h2>Upcoming Games</h2>
             <Games>
                 {upcoming.map((game) => (
