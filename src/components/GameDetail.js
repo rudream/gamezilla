@@ -77,7 +77,10 @@ const GameDetail = ({ pathId }) => {
                     <Detail layoutId={pathId}>
                         <Stats>
                             <div className="rating">
-                                <motion.h3 layoutId={`title ${pathId}`}>
+                                <motion.h3
+                                    id="game-name"
+                                    layoutId={`title ${pathId}`}
+                                >
                                     {game.name}
                                 </motion.h3>
                                 <p>Rating: {game.rating}</p>
@@ -113,6 +116,7 @@ const GameDetail = ({ pathId }) => {
                             <p>{game.description_raw}</p>
                         </Description>
                         <Gallery>
+                            <h2 id="screenshot-title">Screenshots:</h2>
                             {screen.results.map((screen) => {
                                 return (
                                     <img
@@ -143,7 +147,7 @@ const CardShadow = styled(motion.div)`
         width: 0.5rem;
     }
     &::-webkit-scrollbar-thumb {
-        background-color: lightgrey;
+        background-color: #ee6a6a;
     }
     &::-webkit-scrollbar-track {
         background-color: white;
@@ -162,6 +166,7 @@ const Detail = styled(motion.div)`
     img {
         width: 100%;
     }
+    margin: 1rem 0rem;
 `;
 
 const Stats = styled(motion.div)`
@@ -172,6 +177,9 @@ const Stats = styled(motion.div)`
         width: 2rem;
         height: 2rem;
         display: inline;
+    }
+    #game-name {
+        font-size: 4rem;
     }
 `;
 
@@ -214,6 +222,9 @@ const Description = styled(motion.div)`
 const Gallery = styled(motion.div)`
     img {
         margin-bottom: 3rem;
+    }
+    #screenshot-title {
+        padding-top: 0rem;
     }
 `;
 

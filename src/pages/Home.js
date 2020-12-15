@@ -50,6 +50,8 @@ const Home = () => {
                                 <Game
                                     name={game.name}
                                     released={game.released}
+                                    genres={game.genres}
+                                    rating={game.rating}
                                     id={game.id}
                                     image={game.background_image}
                                     key={game.id}
@@ -69,6 +71,8 @@ const Home = () => {
                             id={game.id}
                             image={game.background_image}
                             key={game.id}
+                            genres={game.genres}
+                            rating={game.rating}
                         />
                     ))}
                 </Games>
@@ -81,6 +85,8 @@ const Home = () => {
                             id={game.id}
                             image={game.background_image}
                             key={game.id}
+                            genres={game.genres}
+                            rating={game.rating}
                         />
                     ))}
                 </Games>
@@ -93,6 +99,8 @@ const Home = () => {
                             id={game.id}
                             image={game.background_image}
                             key={game.id}
+                            genres={game.genres}
+                            rating={game.rating}
                         />
                     ))}
                 </Games>
@@ -105,12 +113,13 @@ const GameList = styled(motion.div)`
     padding: 0rem 5rem;
     h2 {
         padding: 5rem 0rem;
+        font-size: 3rem;
     }
     #clear-results {
         color: #ee6a6a;
         font-family: "Montserrat", sans-serif;
         font-weight: lighter;
-        font-size: 1rem;
+        font-size: 1.5rem;
         padding: 1rem;
         cursor: pointer;
     }

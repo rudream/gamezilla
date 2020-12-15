@@ -9,12 +9,20 @@ import { popup } from "../animations";
 
 //Styling and Animation
 
-const Game = ({ name, released, id, image }) => {
+const Game = ({ name, released, id, image, genres, rating }) => {
     const stringPathId = id.toString();
     const dispatch = useDispatch();
     const loadDetailsHandler = () => {
         document.body.style.overflow = "hidden";
         dispatch(loadDetail(id));
+    };
+
+    const formatGenres = (genres) => {
+        const genresArray = [];
+        genres.forEach((genre) => {
+            genresArray.push(genre.name);
+        });
+        return genresArray.join(", ");
     };
 
     return (
@@ -27,6 +35,8 @@ const Game = ({ name, released, id, image }) => {
         >
             <Link to={`/game/${id}`}>
                 <motion.h3 layoutId={`title ${stringPathId}`}>{name}</motion.h3>
+                <p>{formatGenres(genres)}</p>
+                <p>Rating: {rating !== 0 ? rating : "N/A"}</p>
                 <p>{released}</p>
                 <motion.img
                     layoutId={`image ${stringPathId}`}
@@ -49,6 +59,16 @@ const StyledGame = styled(motion.div)`
         width: 100%;
         height: 40vh;
         object-fit: cover;
+    }
+    p {
+        margin: 0.5rem 0rem;
+    }
+    h3 {
+        font-size: 2rem;
+        padding-bottom: 0rem;
+        max-width: 80%;
+        text-align: center;
+        margin: auto;
     }
 `;
 
