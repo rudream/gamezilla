@@ -6,6 +6,7 @@ import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import Game from "../components/Game";
 import GameDetail from "../components/GameDetail";
 import { useLocation } from "react-router-dom";
+import { fadeIn } from "../animations";
 
 const Home = () => {
     //get current location
@@ -22,15 +23,28 @@ const Home = () => {
     const { popular, newGames, upcoming, searched } = useSelector(
         (state) => state.games
     );
+
+    const clearResultsHandler = () => {
+        dispatch({ type: "CLEAR_SEARCHED" });
+    };
+
     return (
-        <GameList>
+        <GameList variants={fadeIn} initial="hidden" animate="show">
             <AnimateSharedLayout type="crossfade">
                 <AnimatePresence>
                     {pathId && <GameDetail pathId={pathId} />}
                 </AnimatePresence>
                 {searched.length ? (
                     <div className="searched">
-                        <h2>Search Results:</h2>
+                        <h2>
+                            Search Results{" "}
+                            <span
+                                onClick={clearResultsHandler}
+                                id="clear-results"
+                            >
+                                Clear Results
+                            </span>
+                        </h2>
                         <Games>
                             {searched.map((game) => (
                                 <Game
@@ -91,6 +105,14 @@ const GameList = styled(motion.div)`
     padding: 0rem 5rem;
     h2 {
         padding: 5rem 0rem;
+    }
+    #clear-results {
+        color: #ee6a6a;
+        font-family: "Montserrat", sans-serif;
+        font-weight: lighter;
+        font-size: 1rem;
+        padding: 1rem;
+        cursor: pointer;
     }
 `;
 
