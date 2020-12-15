@@ -8,7 +8,6 @@ const Game = ({ name, released, id, image }) => {
         <StyledGame>
             <h3>{name}</h3>
             <p>{released}</p>
-            <p>{id}</p>
             <img src={image} alt={name} />
         </StyledGame>
     );
