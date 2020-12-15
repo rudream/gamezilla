@@ -5,6 +5,13 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { smallImage } from "../util";
 
+import playstation from "../img/playstation.svg";
+import steam from "../img/steam.svg";
+import xbox from "../img/xbox.svg";
+import nintendo from "../img/nintendo.svg";
+import apple from "../img/apple.svg";
+import gamepad from "../img/gamepad.svg";
+
 const GameDetail = ({ pathId }) => {
     const history = useHistory();
 
@@ -16,6 +23,35 @@ const GameDetail = ({ pathId }) => {
             history.push("/");
         }
     };
+
+    //get platform icons
+
+    const getPlatform = (platform) => {
+        switch (platform) {
+            case "PlayStation 5":
+            case "PlayStation 4":
+            case "PlayStation 3":
+                return playstation;
+            case "Xbox One":
+            case "Xbox Series S/X":
+            case "Xbox 360":
+                return xbox;
+            case "PC":
+            case "Linux":
+                return steam;
+            case "Nintendo Switch":
+            case "Wii":
+            case "GameCube":
+            case "Wii U":
+                return nintendo;
+            case "iOS":
+            case "macOS":
+                return apple;
+            default:
+                return gamepad;
+        }
+    };
+
     //Data
     const { screen, game, isLoading } = useSelector((state) => state.details);
     return (
@@ -34,9 +70,17 @@ const GameDetail = ({ pathId }) => {
                                 <h3>Platforms</h3>
                                 <Platforms>
                                     {game.platforms.map((data) => (
-                                        <h3 key={data.platform.id}>
-                                            {data.platform.name}
-                                        </h3>
+                                        <Platform key={data.platform.id}>
+                                            <img
+                                                src={getPlatform(
+                                                    data.platform.name
+                                                )}
+                                                alt={data.platform.name}
+                                            ></img>
+                                            <h3 class="platform-name">
+                                                {data.platform.name}
+                                            </h3>
+                                        </Platform>
                                     ))}
                                 </Platforms>
                             </Info>
@@ -116,9 +160,22 @@ const Info = styled(motion.div)`
 const Platforms = styled(motion.div)`
     display: flex;
     justify-content: space-evenly;
-    img {
-        margin-left: 3rem;
+    text-align: center;
+    align-items: flex-end;
+`;
+
+const Platform = styled(motion.div)`
+    .platform-name {
+        font-size: 0.8rem;
+        text-align: center;
+        padding-top: 0.2rem;
     }
+    img {
+        width: 5rem;
+        height: 100px;
+        margin: auto;
+    }
+    margin-left: 2rem;
 `;
 
 const Media = styled(motion.div)`
