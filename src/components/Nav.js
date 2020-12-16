@@ -5,10 +5,11 @@ import logo from "../img/logo.svg";
 import { fetchSearch } from "../actions/gamesAction";
 import { useDispatch } from "react-redux";
 import { fadeIn } from "../animations";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const Nav = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [textInput, setTextInput] = useState("");
 
     const inputHandler = (e) => {
@@ -19,16 +20,18 @@ const Nav = () => {
         e.preventDefault();
         dispatch(fetchSearch(textInput));
         setTextInput("");
+        history.push("/");
     };
 
     const clearSearched = () => {
         dispatch({ type: "CLEAR_SEARCHED" });
+        history.push("/");
     };
 
     return (
         <StyledNav variants={fadeIn} initial="hidden" animate="show">
-            <LogoAndSearch>
-                <Logo onClick={clearSearched}>
+            <LogoAndSearch onClick={clearSearched}>
+                <Logo>
                     <img src={logo} alt="dinosaur logo" />
                     <h1>GameZilla</h1>
                 </Logo>
@@ -41,11 +44,14 @@ const Nav = () => {
                     <button type="submit">Search</button>
                 </form>
             </LogoAndSearch>
-            <LoginLoggedOut>
+            <RightNavLoggedOut>
                 <Link to="/login">
-                    <h2 id="login-button">Login</h2>
+                    <NavButton id="login-button">Login</NavButton>
                 </Link>
-            </LoginLoggedOut>
+                <Link to="/signup">
+                    <NavButton id="signup-button">Sign Up</NavButton>
+                </Link>
+            </RightNavLoggedOut>
         </StyledNav>
     );
 };
@@ -122,18 +128,23 @@ const LogoAndSearch = styled(motion.div)`
     margin: 0rem 0rem;
 `;
 
-const LoginLoggedOut = styled(motion.div)`
+const RightNavLoggedOut = styled(motion.div)`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-right: 1vw;
+`;
+
+const NavButton = styled(motion.div)`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    #login-button {
-        font-family: "Montserrat", sans-serif;
-        font-weight: bold;
-        font-size: 2rem;
-    }
-    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
     height: 15vh;
-    width: 20vw;
+    width: 10vw;
+    cursor: pointer;
     :hover {
         background-color: #ffc65c;
     }

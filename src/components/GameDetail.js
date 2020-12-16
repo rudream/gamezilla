@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { smallImage } from "../util";
+import LibraryButton from "./LibraryButton";
 
 import playstation from "../img/playstation.svg";
 import steam from "../img/steam.svg";
@@ -20,7 +21,6 @@ const GameDetail = ({ pathId }) => {
 
     const exitDetailHandler = (e) => {
         const element = e.target;
-        console.log(element);
         if (element.classList.contains("shadow")) {
             document.body.style.overflow = "auto";
             history.push("/");
@@ -86,6 +86,7 @@ const GameDetail = ({ pathId }) => {
                                 <p>Rating: {game.rating}</p>
                                 {generateStars()}
                             </div>
+                            <LibraryButton id={pathId} />
                             <Info>
                                 <h3>Platforms</h3>
                                 <Platforms>
@@ -97,7 +98,7 @@ const GameDetail = ({ pathId }) => {
                                                 )}
                                                 alt={data.platform.name}
                                             ></img>
-                                            <h3 class="platform-name">
+                                            <h3 className="platform-name">
                                                 {data.platform.name}
                                             </h3>
                                         </Platform>
