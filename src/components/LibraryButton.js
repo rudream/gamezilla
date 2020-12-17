@@ -41,6 +41,7 @@ const LibraryButton = ({ data, alreadyIn }) => {
             .delete()
             .then(() => {
                 if (location.pathname.split("/")[1] === "library") {
+                    document.body.style.overflow = "auto";
                     history.push("/library");
                 }
             });
