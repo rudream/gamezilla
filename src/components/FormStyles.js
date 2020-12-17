@@ -14,7 +14,7 @@ export const StyledForm = styled(motion.form)`
     margin: 6vh auto auto auto;
     padding: 3rem 0rem;
     h1 {
-        margin-bottom: 2rem;
+        margin-bottom: 0rem;
     }
     label {
         flex-direction: column;

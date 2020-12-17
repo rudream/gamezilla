@@ -1,19 +1,39 @@
-const authReducer = (state = {}, action) => {
+const initialState = { isSignedIn: false };
+
+const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case "SIGN_IN":
-            console.log("Welcome back");
-            return state;
+            return {
+                ...state,
+                isSignedIn: true,
+            };
         case "SIGN_IN_ERR":
-            console.log("Sign in error");
-            return state;
+            return {
+                ...state,
+                isSignedIn: false,
+            };
         case "SIGN_UP":
-            console.log("Welcome..");
-            return state;
+            return {
+                ...state,
+                isSignedIn: true,
+            };
+        case "SIGN_OUT":
+            return {
+                ...state,
+                isSignedIn: false,
+            };
         case "SIGN_UP_ERR":
-            console.log("Sign up error");
-            return state;
+            return {
+                ...state,
+                isSignedIn: false,
+            };
+        case "SET_SIGNED_IN":
+            return {
+                ...state,
+                isSignedIn: action.payload.isSignedIn,
+            };
         default:
-            return state;
+            return { ...state };
     }
 };
 

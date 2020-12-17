@@ -1,9 +1,8 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { StyledForm } from "./FormStyles";
-import { signUpWithEmail } from "../actions/authActions";
 import { useDispatch } from "react-redux";
-import { useFirebase } from "react-redux-firebase";
+import { useFirebase, getFirebase } from "react-redux-firebase";
 
 const SignUpComponent = () => {
     const firebase = useFirebase();
@@ -13,14 +12,40 @@ const SignUpComponent = () => {
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
 
+    const [signUpMessage, setSignUpMessage] = useState("");
+
     const signUpWithEmailHandler = (e) => {
         e.preventDefault();
-        const creds = {
-            email: emailRef.current.value,
-            password: passwordRef.current.value,
-        };
-        console.log(creds);
-        dispatch(signUpWithEmail(creds));
+        const firebase = getFirebase();
+
+        if (passwordRef.current.value === passwordConfirmRef.current.value) {
+            firebase
+                .auth()
+                .createUserWithEmailAndPassword(
+                    emailRef.current.value,
+                    passwordRef.current.value
+                )
+                .then(() => {
+                    setSignUpMessage(
+                        <h3 className="success-message">
+                            Welcome to GameZilla! Redirecting..
+                        </h3>
+                    );
+                    dispatch({ type: "SIGN_UP" });
+                })
+                .catch((err) => {
+                    setSignUpMessage(
+                        <h3 className="error-message">
+                            There was a problem signing you up :&#40
+                        </h3>
+                    );
+                    dispatch({ type: "SIGN_UP_ERR" }, err);
+                });
+        } else {
+            setSignUpMessage(
+                <h3 className="error-message">The passwords aren't matching</h3>
+            );
+        }
     };
 
     const signInWithGoogleHandler = (e) => {
@@ -31,13 +56,28 @@ const SignUpComponent = () => {
                 type: "popup",
             })
             .then(() => {
+                setSignUpMessage(
+                    <h3 className="success-message">
+                        Welcome back! Redirecting..
+                    </h3>
+                );
+                dispatch({ type: "SIGN_IN" });
                 history.push("/");
+            })
+            .catch((err) => {
+                setSignUpMessage(
+                    <h3 className="error-message">
+                        There was a problem signing you in.
+                    </h3>
+                );
+                dispatch({ type: "SIGN_IN_ERR" }, err);
             });
     };
 
     return (
         <StyledForm>
             <h1>Sign Up</h1>
+            {signUpMessage}
             <div>
                 <label htmlFor="email">Email</label>
                 <input id="email" type="email" ref={emailRef} required />
@@ -67,7 +107,7 @@ const SignUpComponent = () => {
                         signUpWithEmailHandler(e);
                     }}
                 >
-                    Log in
+                    Sign Up
                 </button>
                 <button
                     type="submit"

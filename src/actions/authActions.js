@@ -1,30 +1,32 @@
-export const signInWithEmail = (creds) => {
+export const signOut = () => {
     return (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
         firebase
             .auth()
-            .signInWithEmailAndPassword(creds.email, creds.password)
+            .signOut()
             .then(() => {
-                dispatch({ type: "SIGN_IN" });
+                dispatch({ type: "SIGN_OUT" });
             })
-            .catch((err) => {
-                dispatch({ type: "SIGN_IN_ERR" }, err);
+            .catch((error) => {
+                dispatch({ type: "SIGN_OUT_ERROR" });
             });
     };
 };
 
-export const signUpWithEmail = (creds) => {
-    return (dispatch, getState, { getFirebase }) => {
-        const firebase = getFirebase();
-
-        firebase
-            .auth()
-            .createUserWithEmailAndPassword(creds.email, creds.password)
-            .then(() => {
-                dispatch({ type: "SIGN_UP" });
-            })
-            .catch((err) => {
-                dispatch({ type: "SIGN_UP_ERR" }, err);
-            });
-    };
+export const setSignedIn = (isSignedIn) => (dispatch) => {
+    if (isSignedIn) {
+        dispatch({
+            type: "SET_SIGNED_IN",
+            payload: {
+                isSignedIn: true,
+            },
+        });
+    } else {
+        dispatch({
+            type: "SET_SIGNED_IN",
+            payload: {
+                isSignedIn: false,
+            },
+        });
+    }
 };

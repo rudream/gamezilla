@@ -6,15 +6,25 @@ import { loadDetail } from "../actions/detailsAction";
 import { Link } from "react-router-dom";
 import { smallImage } from "../util";
 import { popup } from "../animations";
+import { useLocation } from "react-router-dom";
 
 //Styling and Animation
 
 const Game = ({ name, released, id, image, genres, rating }) => {
+    const location = useLocation();
     const stringPathId = id.toString();
     const dispatch = useDispatch();
     const loadDetailsHandler = () => {
         document.body.style.overflow = "hidden";
         dispatch(loadDetail(id));
+    };
+
+    const getPathToGoTo = () => {
+        if (location.pathname === "/") {
+            return `/game/${id}`;
+        } else if (location.pathname.split("/")[1] === "library") {
+            return `/library/game/${id}`;
+        }
     };
 
     const formatGenres = (genres) => {
@@ -33,7 +43,7 @@ const Game = ({ name, released, id, image, genres, rating }) => {
             layoutId={stringPathId}
             onClick={loadDetailsHandler}
         >
-            <Link to={`/game/${id}`}>
+            <Link to={getPathToGoTo}>
                 <motion.h3 layoutId={`title ${stringPathId}`}>{name}</motion.h3>
                 <p>{formatGenres(genres)}</p>
                 <p>Rating: {rating !== 0 ? rating : "N/A"}</p>

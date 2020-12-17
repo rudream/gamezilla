@@ -1,16 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import logo from "../img/logo.svg";
 import { fetchSearch } from "../actions/gamesAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fadeIn } from "../animations";
 import { Link, useHistory } from "react-router-dom";
+import book from "../img/library.svg";
+import { signOut, setSignedIn } from "../actions/authActions";
+import { useFirebase, useFirestoreConnect } from "react-redux-firebase";
 
 const Nav = () => {
+    const firebase = useFirebase();
     const dispatch = useDispatch();
     const history = useHistory();
     const [textInput, setTextInput] = useState("");
+    const { uid } = useSelector((state) => state.firebase.auth);
+    useFirestoreConnect({
+        collection: `users/${uid}/library`,
+        storeAs: "library",
+    });
+
+    useEffect(() => {
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                dispatch(setSignedIn(true));
+            } else {
+                dispatch(setSignedIn(false));
+            }
+        });
+    }, [firebase, dispatch]);
+
+    const { isSignedIn } = useSelector((state) => state.auth);
 
     const inputHandler = (e) => {
         setTextInput(e.target.value);
@@ -28,10 +49,15 @@ const Nav = () => {
         history.push("/");
     };
 
+    const signOutHandler = () => {
+        dispatch(signOut());
+        history.push("/");
+    };
+
     return (
         <StyledNav variants={fadeIn} initial="hidden" animate="show">
-            <LogoAndSearch onClick={clearSearched}>
-                <Logo>
+            <LogoAndSearch>
+                <Logo onClick={clearSearched}>
                     <img src={logo} alt="dinosaur logo" />
                     <h1>GameZilla</h1>
                 </Logo>
@@ -44,14 +70,27 @@ const Nav = () => {
                     <button type="submit">Search</button>
                 </form>
             </LogoAndSearch>
-            <RightNavLoggedOut>
-                <Link to="/login">
-                    <NavButton id="login-button">Login</NavButton>
-                </Link>
-                <Link to="/signup">
-                    <NavButton id="signup-button">Sign Up</NavButton>
-                </Link>
-            </RightNavLoggedOut>
+            {!isSignedIn ? (
+                <RightNavLoggedOut>
+                    <Link to="/login">
+                        <NavButton id="login-button">Login</NavButton>
+                    </Link>
+                    <Link to="/signup">
+                        <NavButton id="signup-button">Sign Up</NavButton>
+                    </Link>
+                </RightNavLoggedOut>
+            ) : (
+                <RightNavLoggedIn>
+                    <Link to="/library">
+                        <NavButton id="library-button">
+                            <img src={book} alt="library icon" />
+                        </NavButton>
+                    </Link>
+                    <NavButton onClick={signOutHandler} id="signout-button">
+                        Log Out
+                    </NavButton>
+                </RightNavLoggedIn>
+            )}
         </StyledNav>
     );
 };
@@ -67,9 +106,11 @@ const StyledNav = styled(motion.nav)`
     height: 15vh;
     margin: 0rem 0rem;
     background-color: orange;
+    width: 100vw;
     h1 {
         font-size: 2rem;
         margin-left: 1rem;
+        width: 13vw;
     }
     input {
         font-size: 2.5vh;
@@ -133,6 +174,23 @@ const RightNavLoggedOut = styled(motion.div)`
     flex-direction: row;
     justify-content: space-around;
     margin-right: 1vw;
+`;
+
+const RightNavLoggedIn = styled(motion.div)`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-right: 1vw;
+    #library-button {
+        width: 15vw;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        margin: 0rem 0rem;
+    }
+    img {
+        height: 7vh;
+    }
 `;
 
 const NavButton = styled(motion.div)`

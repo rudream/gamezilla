@@ -76,7 +76,7 @@ const Home = () => {
                         />
                     ))}
                 </Games>
-                <h2>Popular Games</h2>
+                <h2>High Rated Games</h2>
                 <Games>
                     {popular.map((game) => (
                         <Game
@@ -109,7 +109,7 @@ const Home = () => {
     );
 };
 
-const GameList = styled(motion.div)`
+export const GameList = styled(motion.div)`
     padding: 0rem 5rem;
     h2 {
         padding: 5rem 0rem;
@@ -125,7 +125,7 @@ const GameList = styled(motion.div)`
     }
 `;
 
-const Games = styled(motion.div)`
+export const Games = styled(motion.div)`
     min-height: 80vh;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));

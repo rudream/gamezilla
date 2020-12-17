@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { smallImage } from "../util";
 import LibraryButton from "./LibraryButton";
 
@@ -18,12 +18,17 @@ import starFull from "../img/star-full.png";
 
 const GameDetail = ({ pathId }) => {
     const history = useHistory();
+    const location = useLocation();
 
     const exitDetailHandler = (e) => {
         const element = e.target;
         if (element.classList.contains("shadow")) {
             document.body.style.overflow = "auto";
-            history.push("/");
+            if (location.pathname.split("/")[1] === "game") {
+                history.push("/");
+            } else if (location.pathname.split("/")[1] === "library") {
+                history.push("/library");
+            }
         }
     };
 
@@ -47,6 +52,7 @@ const GameDetail = ({ pathId }) => {
             case "PlayStation 5":
             case "PlayStation 4":
             case "PlayStation 3":
+            case "PlayStation 2":
                 return playstation;
             case "Xbox One":
             case "Xbox Series S/X":
@@ -70,6 +76,24 @@ const GameDetail = ({ pathId }) => {
 
     //Data
     const { screen, game, isLoading } = useSelector((state) => state.details);
+    const useLibrary = () =>
+        useSelector((state) => state.firestore.data.library) ?? {};
+
+    const libraryArray = Object.values(useLibrary());
+
+    const checkIfAlreadyInLibrary = () => {
+        if (libraryArray.length > 0) {
+            return libraryArray.some((game) => {
+                if (game) {
+                    return game.id.toString() === pathId;
+                }
+                return false;
+            });
+        } else {
+            return false;
+        }
+    };
+
     return (
         <>
             {!isLoading && (
@@ -85,8 +109,23 @@ const GameDetail = ({ pathId }) => {
                                 </motion.h3>
                                 <p>Rating: {game.rating}</p>
                                 {generateStars()}
+                                <LibraryButton
+                                    data={{
+                                        id: game.id,
+                                        name: game.name_original,
+                                        date: game.released,
+                                        rating: game.rating,
+                                        backgroundImageSrc: smallImage(
+                                            game.background_image,
+                                            1280
+                                        ),
+                                        platforms: game.platforms,
+                                        description: game.description_raw,
+                                        genres: game.genres,
+                                    }}
+                                    alreadyIn={checkIfAlreadyInLibrary()}
+                                />
                             </div>
-                            <LibraryButton id={pathId} />
                             <Info>
                                 <h3>Platforms</h3>
                                 <Platforms>
@@ -181,6 +220,7 @@ const Stats = styled(motion.div)`
     }
     #game-name {
         font-size: 4rem;
+        max-width: 40vw;
     }
 `;
 
@@ -193,6 +233,8 @@ const Platforms = styled(motion.div)`
     justify-content: space-evenly;
     text-align: center;
     align-items: flex-end;
+    flex-wrap: wrap;
+    max-width: 40vw;
 `;
 
 const Platform = styled(motion.div)`

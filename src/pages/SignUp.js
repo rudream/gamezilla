@@ -1,11 +1,12 @@
-import React, { useRef } from "react";
-import styled from "styled-components";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 import SignUpComponent from "../components/SignUpComponent";
 
 const SignUp = () => {
-    return <SignUpComponent />;
+    const { isSignedIn } = useSelector((state) => state.auth);
+
+    return <>{isSignedIn ? <Redirect to="/" /> : <SignUpComponent />}</>;
 };
 
 export default SignUp;
