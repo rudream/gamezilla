@@ -207,6 +207,10 @@ const Detail = styled(motion.div)`
         width: 100%;
     }
     margin: 1rem 0rem;
+    @media screen and (max-width: 768px) {
+        padding: 2vh 2vw;
+        text-align: center;
+    }
 `;
 
 const Stats = styled(motion.div)`
@@ -222,6 +226,12 @@ const Stats = styled(motion.div)`
         font-size: 4rem;
         max-width: 40vw;
     }
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        #game-name {
+            font-size: 2rem;
+        }
+    }
 `;
 
 const Info = styled(motion.div)`
@@ -235,6 +245,15 @@ const Platforms = styled(motion.div)`
     align-items: flex-end;
     flex-wrap: wrap;
     max-width: 40vw;
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        max-width: 60vw;
+        align-items: center;
+        margin: auto;
+        padding: auto;
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
 `;
 
 const Platform = styled(motion.div)`
@@ -249,6 +268,13 @@ const Platform = styled(motion.div)`
         margin: auto;
     }
     margin-left: 2rem;
+
+    @media screen and (max-width: 768px) {
+        img {
+            width: 15vw;
+        }
+        margin: 0;
+    }
 `;
 
 const Media = styled(motion.div)`
@@ -256,10 +282,23 @@ const Media = styled(motion.div)`
     img {
         width: 100%;
     }
+    @media screen and (max-width: 768px) {
+        img {
+            height: 50vh;
+            overflow: hidden;
+            object-fit: cover;
+        }
+    }
 `;
 
 const Description = styled(motion.div)`
     margin: 5rem 0rem;
+    @media screen and (max-width: 768px) {
+        margin: 3vh 2vw;
+        p {
+            font-size: 1rem;
+        }
+    }
 `;
 
 const Gallery = styled(motion.div)`

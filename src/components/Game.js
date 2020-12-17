@@ -44,13 +44,17 @@ const Game = ({ name, released, id, image, genres, rating }) => {
             onClick={loadDetailsHandler}
         >
             <Link to={getPathToGoTo}>
-                <motion.h3 layoutId={`title ${stringPathId}`}>{name}</motion.h3>
-                <p>{formatGenres(genres)}</p>
-                <p>Rating: {rating !== 0 ? rating : "N/A"}</p>
-                <p>{released}</p>
+                <div className="preview-info">
+                    <motion.h3 layoutId={`title ${stringPathId}`}>
+                        {name}
+                    </motion.h3>
+                    <p>{formatGenres(genres)}</p>
+                    <p>Rating: {rating !== 0 ? rating : "N/A"}</p>
+                    <p>{released}</p>
+                </div>
                 <motion.img
                     layoutId={`image ${stringPathId}`}
-                    src={smallImage(image, 640)}
+                    src={smallImage(image, 1920)}
                     alt={name}
                 />
             </Link>
@@ -59,15 +63,21 @@ const Game = ({ name, released, id, image, genres, rating }) => {
 };
 
 const StyledGame = styled(motion.div)`
-    min-height: 30vh;
     box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
     text-align: center;
     border-radius: 1rem;
     cursor: pointer;
     overflow: hidden;
+    .preview-info {
+        height: 35%;
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+        margin-bottom: 5%;
+    }
     img {
         width: 100%;
-        height: 40vh;
+        height: 500px;
         object-fit: cover;
     }
     p {
@@ -79,6 +89,17 @@ const StyledGame = styled(motion.div)`
         max-width: 80%;
         text-align: center;
         margin: auto;
+    }
+    @media screen and (max-width: 768px) {
+        height: 70vh;
+        width: 70vw;
+        margin: auto;
+        h3 {
+            font-size: 1.5rem;
+        }
+        p {
+            font-size: 1rem;
+        }
     }
 `;
 

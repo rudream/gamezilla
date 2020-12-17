@@ -73,4 +73,22 @@ export const StyledForm = styled(motion.form)`
     a {
         color: #035fbb;
     }
+
+    .success-message {
+        color: #52ba22;
+    }
+    .error-message {
+        color: #911019;
+    }
+    @media screen and (max-width: 768px) {
+        width: 90vw;
+        height: 80vh;
+        input {
+            width: 80vw;
+        }
+        button {
+            min-width: 35vw;
+            margin: 0rem 2vw;
+        }
+    }
 `;

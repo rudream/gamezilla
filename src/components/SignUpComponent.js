@@ -36,7 +36,7 @@ const SignUpComponent = () => {
                 .catch((err) => {
                     setSignUpMessage(
                         <h3 className="error-message">
-                            There was a problem signing you up :&#40
+                            There was a problem signing you up
                         </h3>
                     );
                     dispatch({ type: "SIGN_UP_ERR" }, err);

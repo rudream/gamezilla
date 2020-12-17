@@ -98,7 +98,7 @@ const Nav = () => {
 const StyledNav = styled(motion.nav)`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     padding: 0rem 0rem;
     text-align: center;
@@ -106,17 +106,17 @@ const StyledNav = styled(motion.nav)`
     height: 15vh;
     margin: 0rem 0rem;
     background-color: orange;
-    width: 100vw;
+    max-width: 100vw;
     h1 {
         font-size: 2rem;
         margin-left: 1rem;
         width: 13vw;
     }
     input {
-        font-size: 2.5vh;
-        padding: 2.5vh 2vw;
+        font-size: 1vw;
+        padding: 1vw 1.5vw;
         max-height: 8vh;
-        width: 30vw;
+        max-width: 25vw;
         border: none;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
         outline: none;
@@ -125,13 +125,12 @@ const StyledNav = styled(motion.nav)`
         margin-left: 5rem;
     }
     button {
-        font-size: 2.5vh;
+        font-size: 1vw;
         border: none;
-        padding: 2.5vh 2vw;
-        font-size: 2.5vh;
+        padding: 1vw 1.5vw;
         cursor: pointer;
-        width: 10vw;
         max-height: 8vh;
+        max-width: 8vw;
         background: #2d87e0;
         color: white;
         font-family: "Montserrat", sans-serif;
@@ -144,6 +143,27 @@ const StyledNav = styled(motion.nav)`
     button:hover {
         background: #035fbb;
     }
+    @media screen and (max-width: 768px) {
+        height: 10vh;
+        h1 {
+            display: none;
+            margin: 2vh auto;
+            padding: 2vh auto;
+        }
+        input {
+            min-width: 40vw;
+            font-size: 2.5vw;
+            margin: 0rem 0rem;
+            min-height: 5vh;
+            padding: 1vh 1vw;
+        }
+        button {
+            min-width: 12vw;
+            min-height: 5vh;
+            font-size: 2.5vw;
+            padding: 1vh 1vw;
+        }
+    }
 `;
 
 const Logo = styled(motion.div)`
@@ -154,10 +174,15 @@ const Logo = styled(motion.div)`
     cursor: pointer;
     margin: 0rem 0rem;
     img {
-        width: 7vw;
+        height: 12vh;
     }
     h1 {
         font-size: 3vw;
+    }
+    @media screen and (max-width: 768px) {
+        img {
+            display: none;
+        }
     }
 `;
 
@@ -167,22 +192,26 @@ const LogoAndSearch = styled(motion.div)`
     align-items: center;
     padding-left: 0;
     margin: 0rem 0rem;
+    flex-grow: 3;
+    @media screen and (max-width: 768px) {
+        justify-content: flex-start;
+        min-width: 60vw;
+    }
 `;
 
 const RightNavLoggedOut = styled(motion.div)`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin-right: 1vw;
+    flex-grow: 3;
 `;
 
 const RightNavLoggedIn = styled(motion.div)`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin-right: 1vw;
+    flex-grow: 3;
     #library-button {
-        width: 15vw;
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
@@ -199,14 +228,20 @@ const NavButton = styled(motion.div)`
     justify-content: center;
     font-family: "Montserrat", sans-serif;
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 2vw;
     height: 15vh;
-    width: 10vw;
+    flex-grow: 1;
+    width: 15vw;
     cursor: pointer;
+    padding: auto;
     :hover {
         background-color: #ffc65c;
     }
     transition: all 0.3s ease-in-out;
+    @media screen and (max-width: 768px) {
+        font-size: 3vw;
+        height: 10vh;
+    }
 `;
 
 export default Nav;

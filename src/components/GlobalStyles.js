@@ -48,6 +48,12 @@ const GlobalStyles = createGlobalStyle`
         font-weight: bold;
         font-family: "Montserrat", sans-serif";
     }
+    @media screen and (max-width: 768) {
+        body{
+            margin-bottom: 2vh;
+            max-width: 100vw;
+        }
+    }
 `;
 
 export default GlobalStyles;

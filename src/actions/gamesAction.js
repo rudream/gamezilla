@@ -7,6 +7,9 @@ import {
 } from "../api";
 
 export const loadGames = () => async (dispatch) => {
+    dispatch({
+        type: "LOADING_GAMES",
+    });
     const popularData = await axios.get(popularGamesURL());
     const newGamesData = await axios.get(newGamesURL());
     const upcomingGamesData = await axios.get(upcomingGamesURL());
