@@ -59,7 +59,11 @@ const LibraryButton = ({ data, alreadyIn }) => {
                             onMouseEnter={() => hoverHandler(true)}
                             onMouseLeave={() => hoverHandler(false)}
                         >
-                            <img src={checkmark} alt="already in library" />
+                            <img
+                                onClick={removeFromLibraryHandler}
+                                src={checkmark}
+                                alt="already in library"
+                            />
                             <h3>This game is already in your library</h3>
                         </Button>
                     ) : isHovering ? (
@@ -102,6 +106,9 @@ const Button = styled(motion.div)`
     }
     img {
         margin-right: 2vw;
+    }
+    @media screen and (max-width: 768px) {
+        max-width: 40vw;
     }
 `;
 

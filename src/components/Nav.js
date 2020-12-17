@@ -151,17 +151,23 @@ const StyledNav = styled(motion.nav)`
             padding: 2vh auto;
         }
         input {
-            min-width: 40vw;
+            min-width: 30vw;
             font-size: 2.5vw;
             margin: 0rem 0rem;
-            min-height: 5vh;
-            padding: 1vh 1vw;
+            min-height: 4vh;
+            padding: 1vh 4vw;
         }
         button {
-            min-width: 12vw;
-            min-height: 5vh;
-            font-size: 2.5vw;
+            min-width: 8vw;
+            min-height: 4vh;
+            font-size: 1.5vw;
             padding: 1vh 1vw;
+            margin-right: 5vw;
+        }
+        form {
+            min-width: 70vw;
+            display: flex;
+            justify-content: flex-start;
         }
     }
 `;
@@ -174,14 +180,16 @@ const Logo = styled(motion.div)`
     cursor: pointer;
     margin: 0rem 0rem;
     img {
-        height: 12vh;
+        height: 7vh;
     }
     h1 {
         font-size: 3vw;
     }
     @media screen and (max-width: 768px) {
         img {
-            display: none;
+            width: 15vw;
+            padding: 0rem 0rem;
+            margin-left: 40vw;
         }
     }
 `;
@@ -194,8 +202,11 @@ const LogoAndSearch = styled(motion.div)`
     margin: 0rem 0rem;
     flex-grow: 3;
     @media screen and (max-width: 768px) {
-        justify-content: flex-start;
-        min-width: 60vw;
+        justify-content: space-evenly;
+        padding: 0rem 0rem;
+        max-width: 65vw;
+        min-width: 65vw;
+        margin: 0rem 0rem;
     }
 `;
 
@@ -204,6 +215,12 @@ const RightNavLoggedOut = styled(motion.div)`
     flex-direction: row;
     justify-content: space-around;
     flex-grow: 3;
+    @media screen and (max-width: 768px) {
+        justify-content: space-around;
+        margin: 0rem 5vw;
+        min-width: 35vw;
+        max-width: 35vw;
+    }
 `;
 
 const RightNavLoggedIn = styled(motion.div)`
@@ -219,6 +236,15 @@ const RightNavLoggedIn = styled(motion.div)`
     }
     img {
         height: 7vh;
+    }
+    @media screen and (max-width: 768px) {
+        justify-content: space-around;
+        margin: 0rem 5vw;
+        min-width: 35vw;
+        max-width: 35vw;
+        img {
+            width: 7vw;
+        }
     }
 `;
 

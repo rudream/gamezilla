@@ -85,6 +85,7 @@ export const StyledForm = styled(motion.form)`
         height: 80vh;
         input {
             width: 80vw;
+            border: 2px solid darkgrey;
         }
         button {
             min-width: 35vw;

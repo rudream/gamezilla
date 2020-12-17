@@ -230,6 +230,8 @@ const Stats = styled(motion.div)`
         flex-direction: column;
         #game-name {
             font-size: 2rem;
+            max-width: 70vw;
+            text-align: center;
         }
     }
 `;
