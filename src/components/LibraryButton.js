@@ -65,7 +65,7 @@ const LibraryButton = ({ data, alreadyIn }) => {
                                 src={checkmark}
                                 alt="already in library"
                             />
-                            <h3>This game is already in your library</h3>
+                            <h3>This game is in your library</h3>
                         </Button>
                     ) : isHovering ? (
                         <Button
