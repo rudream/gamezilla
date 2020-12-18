@@ -6,28 +6,28 @@ GameZilla lets you browse through games on all platforms. You can see upcoming, 
 
 ## Features
 
-### Database (Stores a user's library)
+### - Database (Stores a user's library)
 
-### Responsive design
+### - Responsive design
 
-### Upcoming, Popular, and Newly Released titles
+### - Upcoming, Popular, and Newly Released titles
 
 ![homepage screenshot](/screenshots/home.png)
 
-### View game details
+### - View game details
 
 ![details screenshot](/screenshots/details.png)
 ![details gif](/screenshots/details.gif)
 
-### Search
+### - Search
 
 ![search screenshot](/screenshots/search.png)
 
-### Library (Users can add and remove any game from their library)
+### - Library (Users can add and remove any game from their library)
 
 ![library screenshot](/screenshots/library.png)
-![library gif](/screenshots/library.gif)
+![library gif](/screenshots/library.gif.gif)
 
-### User accounts with authentication (Sign up with email or with Google account)
+### - User accounts with authentication (Sign up with email or with Google account)
 
 ![login screenshot](/screenshots/login.png)
