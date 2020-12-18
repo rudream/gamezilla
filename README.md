@@ -6,12 +6,12 @@ GameZilla lets you browse through games on all platforms. You can see upcoming, 
 
 # Technologies Used
 
-### React
-### Redux
-### Firebase
-### Firestore
-### styled-components
-### rawg.io API
+### - React
+### - Redux
+### - Firebase
+### - Firestore
+### - styled-components
+### - rawg.io API
 
 # Features
 
