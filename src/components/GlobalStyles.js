@@ -10,11 +10,11 @@ const GlobalStyles = createGlobalStyle`
         &::-webkit-scrollbar{
             width: 0.5rem;
         }
-        &::webkit-scrollbar-thumb{
+        &::-webkit-scrollbar-thumb{
             background-color: #2d87e0;
         }
 
-        &::webkit-scrollbar-track{
+        &::-webkit-scrollbar-track{
             background-color: white;
         }
     }

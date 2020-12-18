@@ -116,7 +116,7 @@ const StyledNav = styled(motion.nav)`
         font-size: 1vw;
         padding: 1vw 1.5vw;
         max-height: 8vh;
-        max-width: 25vw;
+        width: 30vw;
         border: none;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
         outline: none;
@@ -180,7 +180,7 @@ const Logo = styled(motion.div)`
     cursor: pointer;
     margin: 0rem 0rem;
     img {
-        height: 7vh;
+        height: 10vh;
     }
     h1 {
         font-size: 3vw;
@@ -200,7 +200,7 @@ const LogoAndSearch = styled(motion.div)`
     align-items: center;
     padding-left: 0;
     margin: 0rem 0rem;
-    flex-grow: 3;
+    flex-grow: 6;
     @media screen and (max-width: 768px) {
         justify-content: space-evenly;
         padding: 0rem 0rem;
